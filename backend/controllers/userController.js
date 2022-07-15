@@ -38,6 +38,58 @@ const signup=asyncHandler(async(req,res)=>{
     }
 })
 
+const signin=asyncHandler(async(req, res)=>{
+
+    const {email,password} = req.body
+
+    if(!email || !password){
+        res.status(400)
+        throw new Error("Please fill all the fields")
+    }
+
+    const user=await User.findOne({email}).select("+password")
+
+    if(!user){
+        res.status(400)
+        throw new Error("Email or Password does not match or exist")
+    }
+
+    const isPasswordCorrect= await user.isValidatePassword(password)
+
+    if(!isPasswordCorrect){
+        res.status(400)
+        throw new Error("Email or Password does not match or exist")
+    }
+
+    const token=user.getJwtToken()
+
+    const options={
+        expires:new Date(Date.now() + 30 *24 * 60 * 60 * 1000),
+        httpOnly:true
+    }
+
+    if(user && isPasswordCorrect){
+        res.status(200).cookie("token", token, options).json({
+            token,
+            user
+        })
+    }
+})
+
+const logout=asyncHandler(async(req, res)=>{
+
+    res.cookie("token", null, {
+        expires: new Date(Date.now()),
+        httpOnly:true,
+    })
+
+    res.status(200).json({
+        message:"User Logged Out Successfully"
+    })
+})
+
 module.exports={
-    signup
+    signup,
+    signin,
+    logout
 }
