@@ -9,6 +9,6 @@ const listSchema =mongoose.Schema({
     ]
 })
 
-const List =mongoose.Schema("List", listSchema)
+const List =mongoose.model("List", listSchema)
 
 module.exports=List

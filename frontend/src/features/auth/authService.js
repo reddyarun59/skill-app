@@ -7,7 +7,7 @@ const register=async(userData)=>{
         }
     }
 
-    const {data}=await axios.post("/api/v1/signin", userData, config)
+    const {data}=await axios.post("/api/v1/signup", userData, config)
 
     if(data){
         localStorage.setItem("user", JSON.stringify(data))
