@@ -20,6 +20,17 @@ const addSkill=asyncHandler(async(req, res)=>{
     })
 })
 
+const getSkills=asyncHandler(async(req, res)=>{
+    const skills=await Skill.find({
+        user: req.user._id
+    })
+
+    res.status(200).json({
+        skills
+    })
+})
+
 module.exports={
-    addSkill
+    addSkill,
+    getSkills
 }
