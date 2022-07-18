@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const skillSchema = new mongoose.Schema({
     
     skill:{
-            type:mongoose.Schema.types.ObjectId,
-            ref:"List"
+            type:String,
+            required:true
         },
 
     expert:{

@@ -16,6 +16,7 @@ app.use(cookieParser())
 
 app.use("/api/v1", require("./backend/routes/user"))
 app.use("/api/v1", require("./backend/routes/list"))
+app.use("/api/v1", require("./backend/routes/skill"))
 
 
 app.use(errorHandler)
