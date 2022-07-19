@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 
 const register=async(userData)=>{
     const config={
@@ -32,9 +33,24 @@ const login=async(userData)=>{
     return data
 }
 
+const logout=async()=>{
+    const config={
+        header:{
+            "Content-Type": 'application/json'
+        }
+    }
+    const {data}=await axios.get("/api/v1/logout", config)
+    if(data){
+        localStorage.removeItem("user")
+    }
+    return data
+}
+
+
 const authService = {
     register,
-    login
+    login,
+    logout,
 }
 
 export default authService

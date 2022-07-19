@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
+import {useNavigate} from "react-router-dom"
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../features/auth/authSlice'
 import { fetchUserSkills, reset } from '../features/skill/skillSlice'
+//import {reset} from '../features/auth/authSlice'
 
 const Home = () => {
-
+  const navigate=useNavigate()
   const dispatch=useDispatch()
   const {user}=useSelector((state)=>state.auth)
   const {skills, isLoading, isError, isSuccess, message} = useSelector((state)=>state.skills)
@@ -21,9 +24,44 @@ const Home = () => {
       dispatch(reset())
     }
   },[isError,message, dispatch])
+
+  // async function handleClick(){
+  //   dispatch(logout())
+  //   navigate("/login")
+  // }
+
+  // useEffect(()=>{
+  //   handleClick()
+  // }, [navigate, dispatch])
   
   return (
-    <div>Home</div>
+    <div>
+      <h1>Hello {user&&user.user.name}</h1>
+      {user&&<button>Logout</button>}  
+      {loading?(
+        <div>Loading...</div>
+      ):(
+        <div>
+          <h1>My Skills</h1>
+          <div>
+            {skills.skills?.map((skill)=>(
+              <div key={skill._id} className="flex justify-around">
+                <div>
+                  {skill.skill}
+                </div>
+                <div>
+                  {/* <span>{skill.expert}years</span> */}
+                  <span>{skill.experience}years experience </span>
+                  <span>{skill.level}level with </span>
+                  <span>{skill.proficiency}% proficiency</span>
+                </div>
+                
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   )
 }
 
