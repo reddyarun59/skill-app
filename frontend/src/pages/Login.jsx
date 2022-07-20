@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { login, reset } from '../features/auth/authSlice'
+import { login, authReset } from '../features/auth/authSlice'
 
 const Login = () => {
 
@@ -32,7 +32,7 @@ const Login = () => {
     if(user||isSuccess){
       navigate("/")
     }
-    dispatch(reset)
+    dispatch(authReset)
   },[user, isError, isLoading, isSuccess, message, dispatch,navigate])
 
   if(isLoading){

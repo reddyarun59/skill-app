@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom"
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
-import { fetchUserSkills, reset } from '../features/skill/skillSlice'
+import { fetchUserSkills, skillReset } from '../features/skill/skillSlice'
 //import {reset} from '../features/auth/authSlice'
 
 const Home = () => {
@@ -21,7 +21,7 @@ const Home = () => {
     dispatch(fetchUserSkills())
     setLoading(false)
     return ()=>{
-      dispatch(reset())
+      dispatch(skillReset())
     }
   },[isError,message, dispatch])
 

@@ -22,7 +22,7 @@ const skillSlice = createSlice({
     name:"skills",
     initialState,
     reducers:{
-        reset:(state)=>{
+        skillReset:(state)=>{
             state.isLoading=false
             state.isSuccess=false
             state.isError=false
@@ -49,5 +49,5 @@ const skillSlice = createSlice({
     }
 })
 
-export const {reset}=skillSlice.actions
+export const {skillReset}=skillSlice.actions
 export default skillSlice.reducer
