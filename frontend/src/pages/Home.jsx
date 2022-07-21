@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {useNavigate} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../features/auth/authSlice'
@@ -61,6 +61,12 @@ const Home = () => {
           </div>
         </div>
       )}
+
+      <div>
+        <Link to="/addnewskills">
+          <button>Add Skills</button>
+        </Link>
+      </div>
     </div>
   )
 }
